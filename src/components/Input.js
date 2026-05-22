@@ -1,58 +1,26 @@
 import { useState } from "react";
 
-function Input() {
-  const [name, setName] = useState("");
-  const [relationship, setRelationship] = useState("");
-  const [phone, setPhone] = useState("");
+function Input({ addTask }) {
+  const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const userData = {
-      name,
-      relationship,
-      phone,
-    };
+    addTask(text);
 
-    console.log(userData);
-    alert(JSON.stringify(userData));
-
-    setName("");
-    setRelationship("");
-    setPhone("");
+    setText("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="input-container">
-      <div className="input__left">
-        <h1 className="nav">New contact form</h1>
+    <form onSubmit={handleSubmit} className="form">
+      <input
+        type="text"
+        placeholder="New task..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
 
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-        />
-
-        <input
-          type="text"
-          name="relationship"
-          value={relationship}
-          onChange={(e) => setRelationship(e.target.value)}
-          placeholder="Relationship"
-        />
-
-        <input
-          type="number"
-          name="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="Phone"
-        />
-
-        <button type="submit">Add Contact</button>
-      </div>
+      <button>Add</button>
     </form>
   );
 }
