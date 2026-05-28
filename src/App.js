@@ -30,6 +30,12 @@ function App() {
     setTasks([...tasks, task]);
   };
 
+  const editTask = (indexToEdit, newTask) => {
+    setTasks(
+      tasks.map((task, index) => (index === indexToEdit ? newTask : task))
+    );
+  };
+
   const deleteTask = (indexToDelete) => {
     setTasks(tasks.filter((_, index) => index !== indexToDelete));
   };
@@ -47,6 +53,14 @@ function App() {
             <div className="card-content">
               <p>{task}</p>
             </div>
+            <button className="edit-btn" onClick={() => {
+              const newTask = prompt("Edit task:", task);
+              if (newTask !== null) {
+                editTask(index, newTask);
+              }
+            }}>
+              Edit
+            </button>
             <button className="delete-btn" onClick={() => deleteTask(index)}>
               Delete
             </button>
